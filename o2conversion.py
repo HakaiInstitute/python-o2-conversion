@@ -1,9 +1,13 @@
 """
 Converstion of the matlab package SCOR WG 142 to python
 
-SCOR WG 142: Quality Control Procedures for Oxygen and Other Biogeochemical Sensors on Floats and Gliders. Recommendations on the conversion between oxygen quantities for Bio-Argo floats and other autonomous sensor platforms.
+SCOR WG 142: Quality Control Procedures for Oxygen and Other 
+Biogeochemical Sensors on Floats and Gliders. Recommendations on 
+the conversion between oxygen quantities for Bio-Argo floats 
+and other autonomous sensor platforms.
+
 https://archimer.ifremer.fr/doc/00348/45915/
-DOI 	10.13155/45915
+DOI: 10.13155/45915
 """
 
 import math
@@ -23,7 +27,8 @@ def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
         O2conc (float): oxygen concentration in umol L-1
         T (float): temperature in °C
         S (float): salinity (PSS-78)
-        P (float, optional): hydrostatic pressure in dbar (default: 0 dbar). Defaults to 0.
+        P (float, optional): hydrostatic pressure in dbar (default: 0 dbar). 
+            Defaults to 0.
 
     Returns:
         float: oxygen partial pressure in mbar
@@ -47,7 +52,10 @@ def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
         + 4.94457 * sca_T**3
         - 2.56847e-1 * sca_T**4
         + 3.88767 * sca_T**5
-    )  # temperature correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit mL(STP) L-1 and conversion from mL(STP) L-1 to umol L-1
+    )
+    # temperature correction part from Garcia and Gordon (1992),
+    # Benson and Krause (1984) refit mL(STP) L-1 and
+    # conversion from mL(STP) L-1 to umol L-1
     Scorr = math.exp(
         S
         * (
@@ -57,7 +65,9 @@ def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
             - 8.17083e-3 * sca_T**3
         )
         - 4.88682e-7 * S**2
-    )  # salinity correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit ml(STP) L-1
+    )
+    # salinity correction part from
+    # Garcia and Gordon (1992), Benson and Krause (1984) refit ml(STP) L-1
 
     return (
         O2conc
@@ -79,7 +89,8 @@ def O2ctoO2s(
         T (float): temperature in °C
         S (float): salinity (PSS-78)
         P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
-        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+        p_atm (float, optional): atmospheric (air) pressure in mbar.
+            Defaults to DEFAULT_P_ATM.
 
     Returns:
         float:  oxygen saturation in %
@@ -103,7 +114,10 @@ def O2ctoO2s(
         + 4.94457 * sca_T**3
         - 2.56847e-1 * sca_T**4
         + 3.88767 * sca_T**5
-    )  # temperature correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit mL(STP) L-1 and conversion from mL(STP) L-1 to umol L-1
+    )
+    # temperature correction part from Garcia and Gordon (1992),
+    # Benson and Krause (1984) refit mL(STP) L-1 and
+    # conversion from mL(STP) L-1 to umol L-1
     Scorr = math.exp(
         S
         * (
@@ -113,7 +127,9 @@ def O2ctoO2s(
             - 8.17083e-3 * sca_T**3
         )
         - 4.88682e-7 * S**2
-    )  # salinity correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit ml(STP) L-1
+    )
+    # salinity correction part from Garcia and Gordon (1992),
+    # Benson and Krause (1984) refit ml(STP) L-1
 
     return (
         O2conc
@@ -158,7 +174,10 @@ def O2ptoO2c(pO2: float, T: float, S: float, P: float = 0) -> float:
         + 4.94457 * sca_T**3
         - 2.56847e-1 * sca_T**4
         + 3.88767 * sca_T**5
-    )  # temperature correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit mL(STP) L-1 and conversion from mL(STP) L-1 to umol L-1
+    )
+    # temperature correction part from Garcia and Gordon (1992),
+    # Benson and Krause (1984) refit mL(STP) L-1
+    # and conversion from mL(STP) L-1 to umol L-1
     Scorr = math.exp(
         S
         * (
@@ -168,7 +187,9 @@ def O2ptoO2c(pO2: float, T: float, S: float, P: float = 0) -> float:
             - 8.17083e-3 * sca_T**3
         )
         - 4.88682e-7 * S**2
-    )  # salinity correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit ml(STP) L-1
+    )
+    # salinity correction part from Garcia and Gordon (1992),
+    # Benson and Krause (1984) refit ml(STP) L-1
 
     return (
         pO2
@@ -190,7 +211,8 @@ def O2ptoO2s(
         T (float):  temperature in °C
         S (float): salinity (PSS-78)
         P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
-        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+        p_atm (float, optional): atmospheric (air) pressure in mbar.
+            Defaults to DEFAULT_P_ATM.
 
     Returns:
         float: oxygen saturation in percent
@@ -220,7 +242,8 @@ def O2stoO2c(
         T (float): temperature in °C
         S (float): salinity (PSS-78)
         P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
-        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+        p_atm (float, optional): atmospheric (air) pressure in mbar.
+            Defaults to DEFAULT_P_ATM.
 
     Returns:
         float: oxygen concentration in umol L-1
@@ -244,7 +267,10 @@ def O2stoO2c(
         + 4.94457 * sca_T**3
         - 2.56847e-1 * sca_T**4
         + 3.88767 * sca_T**5
-    )  # temperature correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit mL(STP) L-1 and conversion from mL(STP) L-1 to umol L-1
+    )
+    # temperature correction part from Garcia and Gordon (1992),
+    # Benson and Krause (1984) refit mL(STP) L-1
+    # and conversion from mL(STP) L-1 to umol L-1
     Scorr = math.exp(
         S
         * (
@@ -254,7 +280,9 @@ def O2stoO2c(
             - 8.17083e-3 * sca_T**3
         )
         - 4.88682e-7 * S**2
-    )  # salinity correction part from Garcia and Gordon (1992), Benson and Krause (1984) refit ml(STP) L-1
+    )
+    # salinity correction part from Garcia and Gordon (1992),
+    # Benson and Krause (1984) refit ml(STP) L-1
 
     return (
         O2sat
@@ -278,7 +306,8 @@ def O2stoO2p(
         T (float): temperature in °C
         S (float): salinity (PSS-78)
         P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
-        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+        p_atm (float, optional): atmospheric (air) pressure in mbar.
+            Defaults to DEFAULT_P_ATM.
 
     Returns:
         float: oxygen partial pressure in mbar
