@@ -15,28 +15,19 @@ DEFAULT_P_ATM = 1013.25  # mbar
 
 
 def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
-    # function pO2=O2ctoO2p(O2conc,temp,sal,pres)
-    #
-    # convert molar oxygen concentration to oxygen partial pressure
-    #
-    # inputs:
-    #   O2conc - oxygen concentration in umol L-1
-    #   T      - temperature in °C
-    #   S      - salinity (PSS-78)
-    #   P      - hydrostatic pressure in dbar (default: 0 dbar)
-    #
-    # output:
-    #   pO2    - oxygen partial pressure in mbar
-    #
-    # according to recommendations by SCOR WG 142 "Quality Control Procedures
-    # for Oxygen and Other Biogeochemical Sensors on Floats and Gliders"
-    #
-    # Henry Bittig
-    # Laboratoire d'Océanographie de Villefranche-sur-Mer, France
-    # bittig@obs-vlfr.fr
-    # 28.10.2015
-    # 19.04.2018, v1.1, fixed typo in B2 np.exponent
-    # 01.06.2022, Converted to python
+    """Convert molar oxygen concentration to oxygen partial pressure
+    according to recommendations by SCOR WG 142 "Quality Control Procedures
+    for Oxygen and Other Biogeochemical Sensors on Floats and Gliders
+
+    Args:
+        O2conc (float): oxygen concentration in umol L-1
+        T (float): temperature in °C
+        S (float): salinity (PSS-78)
+        P (float, optional): hydrostatic pressure in dbar (default: 0 dbar). Defaults to 0.
+
+    Returns:
+        float: oxygen partial pressure in mbar
+    """
 
     pH2Osat = 1013.25 * (
         np.exp(
@@ -79,29 +70,20 @@ def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
 def O2ctoO2s(
     O2conc: float, T: float, S: float, P: float = 0, p_atm: float = DEFAULT_P_ATM
 ) -> float:
-    # O2ctoO2s(O2conc,T,S,P,p_atm)
-    #
-    # convert molar oxygen concentration to oxygen saturation
-    #
-    # inputs:
-    #   O2conc - oxygen concentration in umol L-1
-    #   T      - temperature in ∞C
-    #   S      - salinity (PSS-78)
-    #   P      - hydrostatic pressure in dbar (default: 0 dbar)
-    #   p_atm  - atmospheric (air) pressure in mbar (default: 1013.25 mbar)
-    #
-    # output:
-    #   O2sat  - oxygen saturation in #
-    #
-    # according to recommendations by SCOR WG 142 "Quality Control Procedures
-    # for Oxygen and Other Biogeochemical Sensors on Floats and Gliders"
-    #
-    # Henry Bittig
-    # Laboratoire d'OcÈanographie de Villefranche-sur-Mer, France
-    # bittig@obs-vlfr.fr
-    # 28.10.2015
-    # 19.04.2018, v1.1, fixed typo in B2 np.exponent
-    # 01.06.2022, Converted to python
+    """Convert molar oxygen concentration to oxygen saturation
+    according to recommendations by SCOR WG 142 "Quality Control Procedures
+    for Oxygen and Other Biogeochemical Sensors on Floats and Gliders
+
+    Args:
+        O2conc (float): oxygen concentration in umol L-1
+        T (float): temperature in °C
+        S (float): salinity (PSS-78)
+        P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
+        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+
+    Returns:
+        float:  oxygen saturation in %
+    """
 
     pH2Osat = 1013.25 * (
         np.exp(
@@ -144,28 +126,19 @@ def O2ctoO2s(
 
 
 def O2ptoO2c(pO2: float, T: float, S: float, P: float = 0) -> float:
-    # O2ptoO2c(pO2,T,S,P)
-    #
-    # convert oxygen partial pressure to molar oxygen concentration
-    #
-    # inputs:
-    #   pO2    - oxygen partial pressure in mbar
-    #   T      - temperature in °C
-    #   S      - salinity (PSS-78)
-    #   P      - hydrostatic pressure in dbar (default: 0 dbar)
-    #
-    # output:
-    #   O2conc - oxygen concentration in umol L-1
-    #
-    # according to recommendations by SCOR WG 142 "Quality Control Procedures
-    # for Oxygen and Other Biogeochemical Sensors on Floats and Gliders"
-    #
-    # Henry Bittig
-    # Laboratoire d'Océanographie de Villefranche-sur-Mer, France
-    # bittig@obs-vlfr.fr
-    # 28.10.2015
-    # 19.04.2018, v1.1, fixed typo in B2 np.exponent
-    # 01.06.2022, Converted to python
+    """Convert oxygen partial pressure to molar oxygen concentration
+    according to recommendations by SCOR WG 142 "Quality Control Procedures
+    for Oxygen and Other Biogeochemical Sensors on Floats and Gliders
+
+    Args:
+        pO2 (float): oxygen partial pressure in mbar
+        T (float): temperature in °C
+        S (float): salinity (PSS-78)
+        P (float, optional): ydrostatic pressure in dbar. Defaults to 0.
+
+    Returns:
+        float: oxygen concentration in umol L-1
+    """
 
     pH2Osat = 1013.25 * (
         np.exp(
@@ -208,28 +181,20 @@ def O2ptoO2c(pO2: float, T: float, S: float, P: float = 0) -> float:
 def O2ptoO2s(
     pO2: float, T: float, S: float, P: float = 0, p_atm: float = DEFAULT_P_ATM
 ) -> float:
-    # function O2sat=O2ptoO2s(pO2,T,S,P,p_atm)
-    #
-    # convert oxygen partial pressure to oxygen saturation
-    #
-    # inputs:
-    #   pO2    - oxygen partial pressure in mbar
-    #   T      - temperature in °C
-    #   S      - salinity (PSS-78)
-    #   P      - hydrostatic pressure in dbar (default: 0 dbar)
-    #   p_atm  - atmospheric (air) pressure in mbar (default: 1013.25 mbar)
-    #
-    # output:
-    #   O2sat  - oxygen saturation in #
-    #
-    # according to recommendations by SCOR WG 142 "Quality Control Procedures
-    # for Oxygen and Other Biogeochemical Sensors on Floats and Gliders"
-    #
-    # Henry Bittig
-    # Laboratoire d'Océanographie de Villefranche-sur-Mer, France
-    # bittig@obs-vlfr.fr
-    # 28.10.2015
-    # 01.06.2022, Converted to python
+    """Convert oxygen partial pressure to oxygen saturation
+    according to recommendations by SCOR WG 142 "Quality Control Procedures
+    for Oxygen and Other Biogeochemical Sensors on Floats and Gliders
+
+    Args:
+        pO2 (float): oxygen partial pressure in mbar
+        T (float):  temperature in °C
+        S (float): salinity (PSS-78)
+        P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
+        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+
+    Returns:
+        float: oxygen saturation in percent
+    """
 
     pH2Osat = 1013.25 * (
         np.exp(
@@ -246,29 +211,20 @@ def O2ptoO2s(
 def O2stoO2c(
     O2sat: float, T: float, S: float, P: float = 0, p_atm: float = DEFAULT_P_ATM
 ) -> float:
-    # function O2conc=O2stoO2c(O2sat,T,S,P,p_atm)
-    #
-    # convert oxygen saturation to molar oxygen concentration
-    #
-    # inputs:
-    #   O2sat  - oxygen saturation in %
-    #   T      - temperature in °C
-    #   S      - salinity (PSS-78)
-    #   P      - hydrostatic pressure in dbar (default: 0 dbar)
-    #   p_atm  - atmospheric (air) pressure in mbar (default: 1013.25 mbar)
-    #
-    # output:
-    #   O2conc - oxygen concentration in umol L-1
-    #
-    # according to recommendations by SCOR WG 142 "Quality Control Procedures
-    # for Oxygen and Other Biogeochemical Sensors on Floats and Gliders"
-    #
-    # Henry Bittig
-    # Laboratoire d'Océanographie de Villefranche-sur-Mer, France
-    # bittig@obs-vlfr.fr
-    # 28.10.2015
-    # 19.04.2018, v1.1, fixed typo in B2 np.exponent
-    # 01.06.2022, Converted to python
+    """Convert oxygen saturation to molar oxygen concentration
+      according to recommendations by SCOR WG 142 "Quality Control Procedures
+      for Oxygen and Other Biogeochemical Sensors on Floats and Gliders"
+
+    Args:
+        O2sat (float): oxygen saturation in %
+        T (float): temperature in °C
+        S (float): salinity (PSS-78)
+        P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
+        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+
+    Returns:
+        float: oxygen concentration in umol L-1
+    """
 
     pH2Osat = 1013.25 * (
         np.exp(
@@ -313,28 +269,20 @@ def O2stoO2c(
 def O2stoO2p(
     O2sat: float, T: float, S: float, P: float = 0, p_atm: float = DEFAULT_P_ATM
 ) -> float:
-    # O2stoO2p(O2sat,T,S,P,p_atm)
-    #
-    # convert oxygen saturation to oxygen partial pressure
-    #
-    # inputs:
-    #   O2sat  - oxygen saturation in #
-    #   T      - temperature in °C
-    #   S      - salinity (PSS-78)
-    #   P      - hydrostatic pressure in dbar (default: 0 dbar)
-    #   p_atm  - atmospheric (air) pressure in mbar (default: 1013.25 mbar)
-    #
-    # output:
-    #   pO2    - oxygen partial pressure in mbar
-    #
-    # according to recommendations by SCOR WG 142 "Quality Control Procedures
-    # for Oxygen and Other Biogeochemical Sensors on Floats and Gliders"
-    #
-    # Henry Bittig
-    # Laboratoire d'Océanographie de Villefranche-sur-Mer, France
-    # bittig@obs-vlfr.fr
-    # 28.10.2015
-    # 01.06.2022, Converted to python
+    """Convert oxygen saturation to oxygen partial pressure
+    according to recommendations by SCOR WG 142 "Quality Control Procedures
+    for Oxygen and Other Biogeochemical Sensors on Floats and Gliders
+
+    Args:
+        O2sat (float): oxygen saturation in %
+        T (float): temperature in °C
+        S (float): salinity (PSS-78)
+        P (float, optional): hydrostatic pressure in dbar. Defaults to 0.
+        p_atm (float, optional): atmospheric (air) pressure in mbar. Defaults to DEFAULT_P_ATM.
+
+    Returns:
+        float: oxygen partial pressure in mbar
+    """
 
     pH2Osat = 1013.25 * (
         np.exp(
