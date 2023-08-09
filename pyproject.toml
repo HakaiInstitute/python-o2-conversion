@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-o2-conversion"
-version = "0.1.0"
+version = "1.0.0"
 description = "Python transcription of the SCOR WG 142 matlab equations for dissolved oxygen concentration conversion."
 readme = "README.md"
 authors = ["Jessy Barrette <jessy.barrette@hakai.org>"]
