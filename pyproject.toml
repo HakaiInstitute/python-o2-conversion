@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "python-o2-conversion"
+version = "0.1.0"
+description = "Python transcription of the SCOR WG 142 matlab equations for dissolved oxygen concentration conversion."
+readme = "README.md"
+authors = ["Jessy Barrette <jessy.barrette@hakai.org>"]
+repository = "https://github.com/HakaiInstitute/python-o2-conversion"
+packages = [
+    {include = "o2conversion.py"}
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.25.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.4.0"
+black = "^23.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
