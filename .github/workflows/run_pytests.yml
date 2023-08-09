@@ -1,4 +1,4 @@
-name: Test linter, full pytes
+name: Testing
 
 on:
   pull_request:
