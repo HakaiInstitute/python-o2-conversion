@@ -10,7 +10,7 @@ https://archimer.ifremer.fr/doc/00348/45915/
 DOI: 10.13155/45915
 """
 
-import math
+import numpy as np
 
 xO2 = 0.20946  # mole fraction of O2 in dry air (Glueckauf 1951)
 Vm = 0.317  # molar volume of O2 in m3 mol-1 Pa dbar-1 (Enns et al. 1965)
@@ -35,17 +35,17 @@ def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
     """
 
     pH2Osat = 1013.25 * (
-        math.exp(
+        np.exp(
             24.4543
             - (67.4509 * (100 / (T + 273.15)))
-            - (4.8489 * math.log(((273.15 + T) / 100)))
+            - (4.8489 * np.log(((273.15 + T) / 100)))
             - 0.000544 * S
         )
     )  # saturated water vapor in mbar
-    sca_T = math.log(
+    sca_T = np.log(
         (298.15 - T) / (273.15 + T)
     )  # scaled temperature for use in TCorr and SCorr
-    TCorr = 44.6596 * math.exp(
+    TCorr = 44.6596 * np.exp(
         2.00907
         + 3.22014 * sca_T
         + 4.05010 * sca_T**2
@@ -56,7 +56,7 @@ def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
     # temperature correction part from Garcia and Gordon (1992),
     # Benson and Krause (1984) refit mL(STP) L-1 and
     # conversion from mL(STP) L-1 to umol L-1
-    Scorr = math.exp(
+    Scorr = np.exp(
         S
         * (
             -6.24523e-3
@@ -73,7 +73,7 @@ def O2ctoO2p(O2conc: float, T: float, S: float, P: float = 0) -> float:
         O2conc
         * (xO2 * (1013.25 - pH2Osat))
         / (TCorr * Scorr)
-        * math.exp(Vm * P / (R * (T + 273.15)))
+        * np.exp(Vm * P / (R * (T + 273.15)))
     )
 
 
@@ -97,17 +97,17 @@ def O2ctoO2s(
     """
 
     pH2Osat = 1013.25 * (
-        math.exp(
+        np.exp(
             24.4543
             - (67.4509 * (100 / (T + 273.15)))
-            - (4.8489 * math.log(((273.15 + T) / 100)))
+            - (4.8489 * np.log(((273.15 + T) / 100)))
             - 0.000544 * S
         )
     )  # saturated water vapor in mbar
-    sca_T = math.log(
+    sca_T = np.log(
         (298.15 - T) / (273.15 + T)
     )  # scaled temperature for use in TCorr and SCorr
-    TCorr = 44.6596 * math.exp(
+    TCorr = 44.6596 * np.exp(
         2.00907
         + 3.22014 * sca_T
         + 4.05010 * sca_T**2
@@ -118,7 +118,7 @@ def O2ctoO2s(
     # temperature correction part from Garcia and Gordon (1992),
     # Benson and Krause (1984) refit mL(STP) L-1 and
     # conversion from mL(STP) L-1 to umol L-1
-    Scorr = math.exp(
+    Scorr = np.exp(
         S
         * (
             -6.24523e-3
@@ -137,7 +137,7 @@ def O2ctoO2s(
         / (TCorr * Scorr)
         / (p_atm - pH2Osat)
         * (1013.25 - pH2Osat)
-        * math.exp(Vm * P / (R * (T + 273.15)))
+        * np.exp(Vm * P / (R * (T + 273.15)))
     )
 
 
@@ -157,17 +157,17 @@ def O2ptoO2c(pO2: float, T: float, S: float, P: float = 0) -> float:
     """
 
     pH2Osat = 1013.25 * (
-        math.exp(
+        np.exp(
             24.4543
             - (67.4509 * (100 / (T + 273.15)))
-            - (4.8489 * math.log(((273.15 + T) / 100)))
+            - (4.8489 * np.log(((273.15 + T) / 100)))
             - 0.000544 * S
         )
     )  # saturated water vapor in mbar
-    sca_T = math.log(
+    sca_T = np.log(
         (298.15 - T) / (273.15 + T)
     )  # scaled temperature for use in TCorr and SCorr
-    TCorr = 44.6596 * math.exp(
+    TCorr = 44.6596 * np.exp(
         2.00907
         + 3.22014 * sca_T
         + 4.05010 * sca_T**2
@@ -178,7 +178,7 @@ def O2ptoO2c(pO2: float, T: float, S: float, P: float = 0) -> float:
     # temperature correction part from Garcia and Gordon (1992),
     # Benson and Krause (1984) refit mL(STP) L-1
     # and conversion from mL(STP) L-1 to umol L-1
-    Scorr = math.exp(
+    Scorr = np.exp(
         S
         * (
             -6.24523e-3
@@ -195,7 +195,7 @@ def O2ptoO2c(pO2: float, T: float, S: float, P: float = 0) -> float:
         pO2
         / (xO2 * (1013.25 - pH2Osat))
         * (TCorr * Scorr)
-        / math.exp(Vm * P / (R * (T + 273.15)))
+        / np.exp(Vm * P / (R * (T + 273.15)))
     )
 
 
@@ -219,10 +219,10 @@ def O2ptoO2s(
     """
 
     pH2Osat = 1013.25 * (
-        math.exp(
+        np.exp(
             24.4543
             - (67.4509 * (100 / (T + 273.15)))
-            - (4.8489 * math.log(((273.15 + T) / 100)))
+            - (4.8489 * np.log(((273.15 + T) / 100)))
             - 0.000544 * S
         )
     )  # saturated water vapor in mbar
@@ -250,17 +250,17 @@ def O2stoO2c(
     """
 
     pH2Osat = 1013.25 * (
-        math.exp(
+        np.exp(
             24.4543
             - (67.4509 * (100 / (T + 273.15)))
-            - (4.8489 * math.log(((273.15 + T) / 100)))
+            - (4.8489 * np.log(((273.15 + T) / 100)))
             - 0.000544 * S
         )
     )  # saturated water vapor in mbar
-    sca_T = math.log(
+    sca_T = np.log(
         (298.15 - T) / (273.15 + T)
     )  # scaled temperature for use in TCorr and SCorr
-    TCorr = 44.6596 * math.exp(
+    TCorr = 44.6596 * np.exp(
         2.00907
         + 3.22014 * sca_T
         + 4.05010 * sca_T**2
@@ -271,7 +271,7 @@ def O2stoO2c(
     # temperature correction part from Garcia and Gordon (1992),
     # Benson and Krause (1984) refit mL(STP) L-1
     # and conversion from mL(STP) L-1 to umol L-1
-    Scorr = math.exp(
+    Scorr = np.exp(
         S
         * (
             -6.24523e-3
@@ -290,7 +290,7 @@ def O2stoO2c(
         * (TCorr * Scorr)
         * (p_atm - pH2Osat)
         / (1013.25 - pH2Osat)
-        / math.exp(Vm * P / (R * (T + 273.15)))
+        / np.exp(Vm * P / (R * (T + 273.15)))
     )
 
 
@@ -314,10 +314,10 @@ def O2stoO2p(
     """
 
     pH2Osat = 1013.25 * (
-        math.exp(
+        np.exp(
             24.4543
             - (67.4509 * (100 / (T + 273.15)))
-            - (4.8489 * math.log(((273.15 + T) / 100)))
+            - (4.8489 * np.log(((273.15 + T) / 100)))
             - 0.000544 * S
         )
     )  # saturated water vapor in mbar
